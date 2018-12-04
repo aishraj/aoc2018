@@ -1,0 +1,232 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "eca307426c8d64f067e9078ba2ad56c4",
+    "packages": [
+        {
+            "name": "facebook/hack-codegen",
+            "version": "v3.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/hack-codegen.git",
+                "reference": "0b8d145d5ab6be726e0cd201447ea2b64f239a8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/0b8d145d5ab6be726e0cd201447ea2b64f239a8c",
+                "reference": "0b8d145d5ab6be726e0cd201447ea2b64f239a8c",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": ">=3.27.0",
+                "hhvm/hhvm-autoload": "^1.5",
+                "hhvm/hsl": "^1.0.0|^3.26.0"
+            },
+            "require-dev": {
+                "facebook/fbexpect": "^2.0.0",
+                "hhvm/hacktest": "^1.0",
+                "hhvm/hhast": "^3.26.0",
+                "hhvm/type-assert": "^3.1"
+            },
+            "bin": [
+                "bin/hh-codegen-verify-signatures"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Drew Hoskins",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Gaurav Kumar",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Alejandro Marcu",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Matthieu Martin",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Fred Emmott",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Hack Codegen is a library for programatically generating Hack code",
+            "keywords": [
+                "code generation",
+                "hack"
+            ],
+            "time": "2018-10-19T16:36:20+00:00"
+        },
+        {
+            "name": "hhvm/hhast",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/hhast.git",
+                "reference": "97916ba3945d95f89ba6e33ceadbde16bfa0e02e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/97916ba3945d95f89ba6e33ceadbde16bfa0e02e",
+                "reference": "97916ba3945d95f89ba6e33ceadbde16bfa0e02e",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "^3.24.0",
+                "hhvm/hsl": "^1.0.0",
+                "hhvm/type-assert": "^3.1"
+            },
+            "require-dev": {
+                "91carriage/phpunit-hhi": "^5.7",
+                "facebook/fbexpect": "^0.4.0",
+                "facebook/hack-codegen": "~3.0.3",
+                "hhvm/hhvm-autoload": "^1.5",
+                "phpunit/phpunit": "^5.7"
+            },
+            "bin": [
+                "bin/hhast-lint"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2018-03-01T22:15:51+00:00"
+        },
+        {
+            "name": "hhvm/hhvm-autoload",
+            "version": "v1.6.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/hhvm-autoload.git",
+                "reference": "d1dd7ffd5fa831c011266bf417231bdc4eccde87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/d1dd7ffd5fa831c011266bf417231bdc4eccde87",
+                "reference": "d1dd7ffd5fa831c011266bf417231bdc4eccde87",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
+                "hhvm": "^3.28"
+            },
+            "replace": {
+                "facebook/hhvm-autoload": "1.*"
+            },
+            "require-dev": {
+                "facebook/fbexpect": "^2.1",
+                "hhvm/hacktest": "^1.0"
+            },
+            "bin": [
+                "bin/hh-autoload"
+            ],
+            "type": "composer-plugin",
+            "extra": {
+                "class": [
+                    "Facebook\\AutoloadMap\\ComposerPlugin"
+                ],
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/Writer.php",
+                    "src/"
+                ],
+                "files": [
+                    "src/AutoloadMap.php",
+                    "src/Config.php",
+                    "src/TypeAssert.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2018-10-18T18:10:50+00:00"
+        },
+        {
+            "name": "hhvm/hsl",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/hsl.git",
+                "reference": "ccc0c87b62d97794b8775b79bf0c5296ef3ab231"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/hsl/zipball/ccc0c87b62d97794b8775b79bf0c5296ef3ab231",
+                "reference": "ccc0c87b62d97794b8775b79bf0c5296ef3ab231",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "^3.23.2",
+                "hhvm/hhvm-autoload": "^1.4"
+            },
+            "require-dev": {
+                "91carriage/phpunit-hhi": "^5.7",
+                "facebook/fbexpect": "^0.4",
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "The Hack Standard Library",
+            "time": "2018-08-08T16:25:55+00:00"
+        },
+        {
+            "name": "hhvm/type-assert",
+            "version": "v3.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/type-assert.git",
+                "reference": "27909c55ac5d75cac9e3f38f95f43afd7746a949"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/27909c55ac5d75cac9e3f38f95f43afd7746a949",
+                "reference": "27909c55ac5d75cac9e3f38f95f43afd7746a949",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "^3.23.0",
+                "hhvm/hhvm-autoload": "^1.4",
+                "hhvm/hsl": "^1.0|^3.26.0"
+            },
+            "require-dev": {
+                "facebook/fbexpect": "^2.0.0",
+                "hhvm/hacktest": "^1.0",
+                "hhvm/hhast": "^3.27"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Convert untyped data to typed data",
+            "keywords": [
+                "TypeAssert",
+                "hack"
+            ],
+            "time": "2018-10-16T15:54:41+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "hhvm": "^3.28.0"
+    },
+    "platform-dev": []
+}

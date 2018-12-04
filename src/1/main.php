@@ -1,9 +1,11 @@
 <?hh // strict
 
+namespace adventofcode\one;
+
 <<__Entrypoint>>
-async function main(): Awaitable<noreturn> {
+async function one(): Awaitable<noreturn> {
   $file_contents = await read_file("input.txt");
-  $parsed_items = explode("\n", $file_contents);
+  $parsed_items = \explode("\n", $file_contents);
 
   //I wanted to use the pipe operator and do it using a reduce step
   //But the lack of documentation did not help.
@@ -12,20 +14,20 @@ async function main(): Awaitable<noreturn> {
     $item = (int)$number_val;
     $s += $item;
   }
-  \var_dump($s);
+  echo($s);
   exit(0);
 }
 
 async function read_file(string $file_name): Awaitable<string> {
-  $file_handle = fopen($file_name, "r");
+  $file_handle = \fopen($file_name, "r");
   $result = "";
   if ($file_handle) {
-    while (($line = fgets($file_handle)) !== false) {
+    while (($line = \fgets($file_handle)) !== false) {
       $result .= $line;
     }
-    fclose($file_handle);
+    \fclose($file_handle);
   } else {
-    throw new Exception("Unable to open the file for readidng");
+    throw new \Exception("Unable to open the file for readidng");
   }
   return $result;
 }
