@@ -2,9 +2,11 @@
 
 namespace adventofcode\one;
 
+require __DIR__.'/../vendor/hh_autoload.php';
+
 <<__Entrypoint>>
 async function one(): Awaitable<noreturn> {
-  $file_contents = await read_file("input.txt");
+  $file_contents = await read_file("src/one_input.txt");
   $parsed_items = \explode("\n", $file_contents);
 
   //I wanted to use the pipe operator and do it using a reduce step
@@ -27,7 +29,7 @@ async function read_file(string $file_name): Awaitable<string> {
     }
     \fclose($file_handle);
   } else {
-    throw new \Exception("Unable to open the file for readidng");
+    throw new \Exception("Unable to open the file for reading");
   }
   return $result;
 }

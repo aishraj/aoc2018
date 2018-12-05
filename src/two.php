@@ -1,14 +1,15 @@
 <?hh // strict
 
-use namespace HH\Lib\C;
 namespace adventofcode\two;
 
+require __DIR__.'/../vendor/hh_autoload.php';
 
-//TODO: Make sure that the autoloader works
+use namespace HH\Lib\C;
+
 
 <<__Entrypoint>>
 async function two(): Awaitable<noreturn> {
-  $file_contents = await two_read_file("input.txt");
+  $file_contents = await two_read_file("src/two_input.txt");
   $parsed_items = \explode("\n", $file_contents);
 
   $s = 0;
@@ -16,6 +17,7 @@ async function two(): Awaitable<noreturn> {
   foreach ($parsed_items as $number_val) {
     $item = (int)$number_val;
     $s += $item;
+    \var_dump($results);
     if (C\contains_key($results, $s)) {
       \var_dump($s);
       break;
@@ -36,7 +38,7 @@ async function two_read_file(string $file_name): Awaitable<string> {
     }
     \fclose($file_handle);
   } else {
-    throw new \Exception("Unable to open the file for readidng");
+    throw new \Exception("Unable to open the file for reading");
   }
   return $result;
 }
