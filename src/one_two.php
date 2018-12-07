@@ -1,6 +1,6 @@
 <?hh // strict
 
-namespace adventofcode\two;
+namespace adventofcode\one\two;
 
 require __DIR__.'/../vendor/hh_autoload.php';
 
@@ -12,7 +12,6 @@ async function two(): Awaitable<noreturn> {
   $file_contents = await read_file("src/two_input.txt");
   $parsed_items =
     Str\split($file_contents, "\n") |> Vec\map($$, $item ==> (int)$item);
-  \var_dump("the parsed items are", $parsed_items);
   $seen = keyset[0];
   $current_index = 0;
   while (true) {
@@ -33,6 +32,7 @@ async function two(): Awaitable<noreturn> {
   exit(0);
 }
 
+//TODO: Move this into a utils module.
 //TODO: fix major bug where an empty line gets parsed as 0
 async function read_file(string $file_name): Awaitable<string> {
   $file_handle = \fopen($file_name, "r");

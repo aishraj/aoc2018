@@ -1,6 +1,6 @@
 <?hh // strict
 
-namespace adventofcode\one;
+namespace adventofcode\one\one;
 
 require __DIR__.'/../vendor/hh_autoload.php';
 
