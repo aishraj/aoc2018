@@ -1,4 +1,4 @@
-<?hh
+<?hh //strict
 
 namespace adventofcode\two\one;
 
