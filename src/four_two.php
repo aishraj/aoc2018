@@ -3,18 +3,12 @@
 namespace adventofcode\four\one;
 
 require __DIR__.'/../vendor/hh_autoload.php';
-use namespace HH\Lib\{C, Str, Vec, Dict, Keyset, Regex, Math};
+use namespace HH\Lib\{C, Str, Vec, Dict, Regex, Math};
 
-type shiftinfo = shape(
-	'timestamp' => string,
-	'minute' => int,
-	?'guard_id' => int,
-	'action' => string,
-);
 
 <<__EntryPoint>>
-async function main_four_one(): Awaitable<noreturn> {
-	$file_contents = await read_file("src/input_day_4_test.txt");
+async function main_four_two(): Awaitable<noreturn> {
+	$file_contents = await read_file_4_2("src/input_day_4.txt");
 	$parsed_items = Str\split($file_contents, "\n")
 		|> Vec\filter($$, $item ==> Str\length($item) > 0);
 	$results = Vec\map($parsed_items, $line ==> {
@@ -47,7 +41,7 @@ async function main_four_one(): Awaitable<noreturn> {
 
 	//$guard_ids = Vec\map($results, $item ==> $item['guard_id'] );
 	//\var_dump($guard_ids);
-	$total_asleep = dict[];
+
 	$minute_asleep = dict[];
 	$guard = null;
 	$sleep = 0;
@@ -65,8 +59,6 @@ async function main_four_one(): Awaitable<noreturn> {
 		} else if (Str\contains($item['action'], "wakes up")) {
 			$sleep_end = $item['minute'];
 			$sleep = $sleep_end - $sleep_start;
-			$current_asleep = $total_asleep[$guard] ?? 0;
-			$total_asleep[$guard] = $current_asleep + $sleep;
 			$cur_min_asleep = $minute_asleep[$guard] ?? vec[];
 			$minute_asleep[$guard] = Vec\concat(
 				$cur_min_asleep,
@@ -75,27 +67,46 @@ async function main_four_one(): Awaitable<noreturn> {
 		}
 
 	}
-	list($top_sleepy_guard, $_top_sleep_duration) =
-		get_max_key_vey($total_asleep);
-	$durations = $minute_asleep[$top_sleepy_guard];
-	$top_sleepy_minutes = C\reduce(
-		$durations,
-		($agg, $item) ==> {
-			$current_count = $agg[$item] ?? 0;
-			$agg[$item] = $current_count + 1;
-			return $agg;
-		},
-		dict[],
-	);
-	list($top_sleepy_min, $_repeat_times) =
-		get_max_key_vey($top_sleepy_minutes);
-	\var_dump($top_sleepy_min);
-	\var_dump($top_sleepy_guard);
-	\var_dump($top_sleepy_guard * $top_sleepy_min);
+
+	$guard_frequent_minute = Dict\map($minute_asleep, $sleep_timing ==> {
+		$sleep_histogram = C\reduce(
+			$sleep_timing,
+			($histogram, $minute) ==> {
+				$current_count = $histogram[$minute] ?? 0;
+				$histogram[$minute] = $current_count + 1;
+				return $histogram;
+			},
+			dict[],
+		);
+		//\var_dump($sleep_histogram);
+		list($frequent_sleep_minute, $repeat_count) =
+			get_max_key_vey_2($sleep_histogram);
+		return tuple($frequent_sleep_minute, $repeat_count);
+	});
+
+
+	// \var_dump($guard_frequent_minute);
+	$frequent_guard_id = null;
+	$frequent_minute = null;
+	$max_repeat_time = -1;
+	foreach ($guard_frequent_minute as $guard_id => $max_repeat) {
+		list($minute, $times) = $max_repeat;
+		if ($times > $max_repeat_time) {
+			$frequent_minute = $minute;
+			$frequent_guard_id = $guard_id;
+			$max_repeat_time = $times;
+		}
+	}
+	//list($frequent_guard, $frequent_time) = get_max_key_vey_2($guard_frequent_minute);
+
+	\var_dump($frequent_guard_id, $frequent_minute);
+	if ($frequent_guard_id !== null && $frequent_minute !== null) {
+		\var_dump($frequent_guard_id * $frequent_minute);
+	}
 	exit(0);
 }
 
-function get_max_key_vey(dict<int, int> $d): (int, int) {
+function get_max_key_vey_2(dict<int, int> $d): (int, int) {
 	$max_key = -1;
 	$max_value = 0;
 	foreach ($d as $k => $v) {
@@ -109,7 +120,7 @@ function get_max_key_vey(dict<int, int> $d): (int, int) {
 
 //TODO: Move this into a utils module.
 //TODO: fix major bug where an empty line gets parsed as 0
-async function read_file(string $file_name): Awaitable<string> {
+async function read_file_4_2(string $file_name): Awaitable<string> {
 	$file_handle = \fopen($file_name, "r");
 	$result = "";
 	if ($file_handle) {
