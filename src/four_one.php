@@ -3,7 +3,7 @@
 namespace adventofcode\four\one;
 
 require __DIR__.'/../vendor/hh_autoload.php';
-use namespace HH\Lib\{C, Str, Vec, Dict, Keyset, Regex};
+use namespace HH\Lib\{C, Str, Vec, Dict, Keyset, Regex, Math};
 
 type shiftinfo = shape(
 	'timestamp' => string,
@@ -30,7 +30,7 @@ async function main_four_one(): Awaitable<noreturn> {
 			if ($guard_id === null) {
 				$id = null;
 			} else {
-				$id = (int)$guard_id[0];
+				$id = (int)$guard_id[1];
 			}
 			return shape(
 				'timestamp' => $times[1],
@@ -44,6 +44,9 @@ async function main_four_one(): Awaitable<noreturn> {
 	})
 		|> Vec\filter_nulls($$)
 		|> Vec\sort_by($$, $re ==> $re['timestamp']);
+
+	//$guard_ids = Vec\map($results, $item ==> $item['guard_id'] );
+	//\var_dump($guard_ids);
 	$total_asleep = dict[];
 	$minute_asleep = dict[];
 	$guard = null;
@@ -61,17 +64,47 @@ async function main_four_one(): Awaitable<noreturn> {
 			$sleep_start = $item['minute'];
 		} else if (Str\contains($item['action'], "wakes up")) {
 			$sleep_end = $item['minute'];
-			$sleep = $sleep_end - $sleep_start + 1;
+			$sleep = $sleep_end - $sleep_start;
 			$current_asleep = $total_asleep[$guard] ?? 0;
 			$total_asleep[$guard] = $current_asleep + $sleep;
 			$cur_min_asleep = $minute_asleep[$guard] ?? vec[];
-			$minute_asleep[$guard] =
-				Vec\concat($cur_min_asleep, [tuple($sleep_start, $sleep_end)]);
+			$minute_asleep[$guard] = Vec\concat(
+				$cur_min_asleep,
+				Vec\range($sleep_start, $sleep_end - 1),
+			);
 		}
 
 	}
-	\echo($minute_asleep);
+	list($top_sleepy_guard, $_top_sleep_duration) =
+		get_max_key_vey($total_asleep);
+	$durations = $minute_asleep[$top_sleepy_guard];
+	$top_sleepy_minutes = C\reduce(
+		$durations,
+		($agg, $item) ==> {
+			$current_count = $agg[$item] ?? 0;
+			$agg[$item] = $current_count + 1;
+			return $agg;
+		},
+		dict[],
+	);
+	list($top_sleepy_min, $_repeat_times) =
+		get_max_key_vey($top_sleepy_minutes);
+	\var_dump($top_sleepy_min);
+	\var_dump($top_sleepy_guard);
+	\var_dump($top_sleepy_guard * $top_sleepy_min);
 	exit(0);
+}
+
+function get_max_key_vey(dict<int, int> $d): (int, int) {
+	$max_key = -1;
+	$max_value = 0;
+	foreach ($d as $k => $v) {
+		if ($v > $max_value) {
+			$max_key = $k;
+			$max_value = $v;
+		}
+	}
+	return tuple($max_key, $max_value);
 }
 
 //TODO: Move this into a utils module.
