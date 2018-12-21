@@ -1,9 +1,10 @@
 {
 	"require": {
-		"hhvm/hhast": "=1.0.1",
+		"hhvm/hhast": "3.28.0",
 		"hhvm/hhvm-autoload": "^1.5",
 		"hhvm": "^3.28.0",
-		"hhvm/hsl": "^1.0.1",
-		"facebook/hack-codegen": "^3.0"
+		"hhvm/hsl": "^3.28.0",
+		"hhvm/hsl-experimental": "^3.28.2",
+		"facebook/hack-codegen": "^3"
 	}
 }

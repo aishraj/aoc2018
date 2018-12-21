@@ -6,7 +6,7 @@ require __DIR__.'/../vendor/hh_autoload.php';
 use namespace adventofcode\one\two;
 use namespace HH\Lib\{C, Str, Vec, Dict};
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 async function two_main(): Awaitable<noreturn> {
 	$file_parsed = await read_file_two("src/input_day_two.txt");
 	$lines = Str\split($file_parsed, "\n")

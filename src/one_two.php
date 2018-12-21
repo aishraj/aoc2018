@@ -7,7 +7,7 @@ require __DIR__.'/../vendor/hh_autoload.php';
 use namespace HH\Lib\{C, Str, Vec};
 
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 async function two(): Awaitable<noreturn> {
   $file_contents = await read_file("src/two_input.txt");
   $parsed_items =

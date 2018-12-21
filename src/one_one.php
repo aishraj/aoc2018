@@ -4,7 +4,7 @@ namespace adventofcode\one\one;
 
 require __DIR__.'/../vendor/hh_autoload.php';
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 async function one(): Awaitable<noreturn> {
   $file_contents = await read_file("src/one_input.txt");
   $parsed_items = \explode("\n", $file_contents);

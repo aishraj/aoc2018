@@ -6,7 +6,7 @@ require __DIR__.'/../vendor/hh_autoload.php';
 use namespace HH\Lib\{C, Str, Vec, Dict};
 
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 async function main_three(): Awaitable<noreturn> {
 	$file_contents = await read_file("src/input_day_3.txt");
 	$parsed_items = Str\split($file_contents, "\n")
